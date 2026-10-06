@@ -1,0 +1,84 @@
+/* ═══ 11 · ADMISSIONS — paper mode ═══════════════════════════════
+   Static: a long form. Header bar, checklist, five states, CTA.    */
+.adm { background: var(--night); color: var(--ink); }
+.adm__pin { position: relative; }
+.adm__sheet { position: relative; background: var(--bone); color: var(--ink); padding: 84px var(--pad) 40px; min-height: 100svh;
+  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(20, 22, 28, .06) 31px 32px); }
+.adm__bar { display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; background: var(--ink); color: var(--bone); padding: 12px 16px; font: 500 12px/1.3 var(--f-mono); letter-spacing: .03em; }
+.adm__bar b { font: 900 22px/1 var(--f-display); font-variation-settings: 'wdth' 100, 'wght' 900; letter-spacing: 0; }
+.adm__rev { opacity: .6; margin-left: auto; }
+.adm__body { display: grid; gap: 40px; padding: 5vh 0; }
+.adm__steps { display: grid; gap: 18px; align-content: start; }
+.adm__steps li { display: flex; gap: 14px; align-items: flex-start; position: relative; }
+.adm__steps li:not(:last-child)::after { content: ''; position: absolute; left: 10px; top: 28px; height: calc(100% - 4px); width: 1px; background: rgba(20, 22, 28, .35); }
+.adm__tick { width: 21px; height: 21px; flex: none; margin-top: 2px; color: var(--ink); background: var(--bone); position: relative; z-index: 1; }
+.adm__lbl { position: relative; display: grid; gap: 2px; }
+.adm__lbl b { font: 700 18px/1.1 var(--f-display); font-variation-settings: 'wdth' 90, 'wght' 700; }
+.adm__lbl .meta { color: rgba(20, 22, 28, .55); }
+.adm__strike { position: absolute; left: -4px; right: -6px; top: 58%; height: 3px; background: #e0361a; transform-origin: left; transform: rotate(-1.2deg) scaleX(0); }
+.adm__stage { position: relative; display: grid; gap: 54px; }
+.adm__state { display: grid; gap: 12px; align-content: start; }
+.adm__word { font-size: clamp(54px, 15vw, 150px); --wdth: 78; color: var(--ink); }
+.adm__line { font: 500 19px/1.4 var(--f-display); max-width: 520px; }
+.adm__when { color: var(--signal); font-weight: 500; }
+.adm__vis { display: none; }
+.adm__cta { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn--xl { padding: 1.5em 2.4em; font-size: 20px; }
+.btn--ink { color: var(--ink); } .btn--ink::before { background: var(--ink); } .btn--ink:hover, .btn--ink:focus-visible { color: var(--bone); }
+.adm__exit { margin-top: 22px; color: rgba(20, 22, 28, .7); display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; }
+.adm__opt { display: inline-flex; gap: 6px; align-items: center; }
+.adm__opt i { width: 12px; height: 12px; border: 1.2px solid currentColor; position: relative; }
+.adm__opt.is-x i::before, .adm__opt.is-x i::after { content: ''; position: absolute; left: 50%; top: -3px; width: 1.6px; height: 16px; background: #e0361a; transform: translateX(-50%) rotate(45deg); }
+.adm__opt.is-x i::after { transform: translateX(-50%) rotate(-45deg); }
+.adm__flood { display: none; }
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+  .adm__pin { height: 100svh; overflow: hidden; background: var(--night); }
+  .adm__sheet { position: absolute; inset: 0; padding: 78px var(--pad) 62px; display: grid; grid-template-rows: auto 1fr auto; min-height: 0; will-change: transform; }
+  .adm__body { grid-template-columns: 290px 1fr; gap: 3vw; padding: 3svh 0 1svh; min-height: 0; }
+  .adm__steps { gap: 3.4svh; padding-top: 2svh; }
+  .adm__stage { display: block; min-height: 0; }
+  .adm__state { position: absolute; inset: 0; display: block; }
+  .adm__word { position: absolute; left: 0; top: 2svh; font-size: min(15.5vw, calc(64vw / (var(--n) * .56)), 33svh); margin: 0; white-space: nowrap; }
+  .adm__line { position: absolute; left: 0; top: calc(2svh + min(15.5vw, 33svh) * .98); font-size: 20px; max-width: 440px; }
+  .adm__when { position: absolute; left: 0; top: calc(2svh + min(15.5vw, 33svh) * .98 + 84px); }
+  .adm__vis { display: block; position: absolute; right: 0; bottom: 4svh; width: min(32vw, 52svh); height: min(34svh, 28vw); }
+  .adm__cta { position: absolute; left: 0; bottom: 3svh; z-index: 4; }
+  .adm__exit { margin: 0; }
+  .adm__flood { display: block; position: absolute; inset: 0; z-index: 10; background: var(--signal); pointer-events: none; --r: 0px; --fx: 50%; --fy: 50%; clip-path: circle(var(--r) at var(--fx) var(--fy)); }
+  /* visuals */
+  .v-rings { position: absolute; inset: 0; display: grid; place-items: center; }
+  .v-ring { position: absolute; width: calc(var(--r) * 22%); aspect-ratio: 1; border: 1.5px solid var(--ink); border-radius: 50%; opacity: .8; }
+  .v-ring__dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--signal); }
+  .v-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; align-content: center; height: 100%; }
+  .v-chip { display: flex; gap: 10px; align-items: center; font: 600 15px/1.1 var(--f-display); text-transform: capitalize; }
+  .v-box { width: 18px; height: 18px; flex: none; overflow: visible; }
+  .v-form { display: grid; gap: 14px; align-content: center; height: 100%; position: relative; }
+  .v-field { display: grid; gap: 4px; } .v-field .meta { color: rgba(20, 22, 28, .55); }
+  .v-bar { display: block; height: 2px; background: var(--ink); transform-origin: left; }
+  .v-sign { width: 160px; margin-top: -6px; }
+  .v-stamp { position: absolute; right: 6%; top: 18%; display: grid; place-items: center; gap: 2px; padding: 18px 26px; border: 4px double #e0361a; color: #e0361a; font: 500 11px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .1em; mix-blend-mode: multiply; }
+  .v-stamp b { font: 900 38px/1 var(--f-display); font-variation-settings: 'wdth' 90, 'wght' 900; letter-spacing: .02em; }
+  .v-sun { position: absolute; inset: 0; overflow: hidden; display: grid; place-items: end center; }
+  .v-sun__disc { width: min(26svh, 20vw); aspect-ratio: 1; border-radius: 50%; background: var(--signal); margin-bottom: -8%; }
+  .v-sun__line { position: absolute; left: 0; right: 0; bottom: 8%; height: 1px; background: var(--ink); }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .adm__pin { height: 100svh; overflow: hidden; background: var(--night); }
+  .adm__sheet { position: absolute; inset: 0; padding: 72px var(--pad) 70px; min-height: 0; display: grid; grid-template-rows: auto 1fr auto; }
+  .adm__body { grid-template-columns: 1fr; gap: 14px; padding: 12px 0; min-height: 0; }
+  .adm__steps { display: flex; gap: 8px; }
+  .adm__steps li { flex: 1; flex-direction: column; gap: 6px; }
+  .adm__steps li::after { display: none; }
+  .adm__lbl .meta, .adm__lbl b { font-size: 10px; } .adm__lbl b { font-weight: 600; }
+  .adm__stage { display: block; min-height: 0; position: relative; }
+  .adm__state { position: absolute; inset: 0; display: block; }
+  .adm__word { position: absolute; left: 0; top: 4svh; font-size: min(22vw, calc(90vw / (var(--n) * .6))); white-space: nowrap; }
+  .adm__line { position: absolute; left: 0; right: 0; top: calc(4svh + 24vw); font-size: 16px; }
+  .adm__when { position: absolute; left: 0; top: calc(4svh + 24vw + 76px); }
+  .adm__vis { display: none; }
+  .adm__cta { position: absolute; left: 0; right: 0; bottom: 0; flex-direction: column; }
+  .adm__cta .btn { justify-content: center; }
+  .adm__exit { display: none; }
+  .adm__flood { display: block; position: absolute; inset: 0; z-index: 10; background: var(--signal); pointer-events: none; --r: 0px; --fx: 50%; --fy: 80%; clip-path: circle(var(--r) at var(--fx) var(--fy)); }
+}

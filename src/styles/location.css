@@ -1,0 +1,44 @@
+/* ═══ 10 · LOCATION ═════════════════════════════════════════════
+   Static: the campus plan with its four lists beside it.         */
+.map { background: var(--night); color: var(--bone); }
+.map__pin { position: relative; padding: 14vh var(--pad); display: grid; gap: 6vh; }
+.map__canvas, .map__grid, .map__city, .map__crop, .map__scalebox { display: none; }
+.map__head { display: grid; gap: 10px; }
+.map__level { font-size: clamp(54px, 13vw, 160px); --wdth: 72; }
+.map__plan { position: relative; }
+.map__plan .map__svg { width: 100%; height: auto; background: rgba(10, 18, 38, .5); box-shadow: inset 0 0 0 1px var(--line); }
+.map__coords { color: var(--dim); }
+.map__panel ul { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.map__group p { font: 400 15px/1.55 var(--f-display); color: var(--mist); margin-top: 6px; }
+.map__group h3 { color: var(--signal); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .map__pin { height: 100svh; overflow: hidden; padding: 0; display: block; }
+  .map__canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map__grid { display: block; position: absolute; inset: 0; opacity: .5; -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 10%, transparent 90%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 10%, transparent 90%); }
+  .map__layer { display: block; position: absolute; inset: 0; opacity: 0; transform-origin: 50% 50%; pointer-events: none; }
+  .map__layer .map__svg { width: 100%; height: 100%; background: none; box-shadow: none; }
+  .map__svg { overflow: visible; }
+  .map__plan .map__svg { padding: 14svh 30vw 12svh 4vw; }
+  .map__city .map__svg { padding: 6svh 3vw; }
+  .map__head { position: absolute; z-index: 4; left: var(--pad); top: 84px; }
+  .map__level { font-size: min(11vw, 18svh); }
+  .map__level.pop { animation: pop .7s var(--ease-out); }
+  @keyframes pop { from { clip-path: inset(0 0 100% 0); transform: translateY(24px); } to { clip-path: inset(0); transform: none; } }
+  .map__coords { position: absolute; z-index: 4; left: var(--pad); bottom: 62px; color: var(--bone); }
+  .map__scalebox { display: flex; align-items: center; gap: 12px; position: absolute; z-index: 4; right: var(--pad); bottom: 62px; }
+  .map__scalebox i { width: 64px; height: 6px; border: 1px solid var(--bone); border-top: 0; }
+  .map__crop { display: block; z-index: 4; inset: 76px var(--pad) 90px; }
+  .map__panel { position: absolute; z-index: 5; right: var(--pad); top: 50%; translate: 0 -50%; width: min(300px, 26vw); }
+  .map__panel ul { position: relative; display: block; height: 130px; }
+  .map__group { position: absolute; left: 0; right: 0; top: 0; opacity: 0; transform: translateX(16px); transition: opacity .5s, transform .6s var(--ease-out); }
+  .map__group.is-on { opacity: 1; transform: none; }
+  .map__group p { font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .map__panel { left: var(--pad); right: var(--pad); width: auto; top: auto; bottom: 96px; translate: 0 0; }
+  .map__group p { font-size: 12.5px; }
+  .map__crop, .map__scalebox { display: none; }
+  .map__plan .map__svg { padding: 22svh 2vw 28svh; }
+  .map__level { font-size: 19vw; }
+}

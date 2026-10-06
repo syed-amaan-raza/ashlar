@@ -1,0 +1,35 @@
+/* ═══ 08 · PEOPLE ════════════════════════════════════════════════
+   Static: portrait, name and quote, one person after another.     */
+.ppl { background: var(--night); color: var(--bone); }
+.ppl__pin { position: relative; padding: 12vh var(--pad); display: grid; gap: 10vh; }
+.ppl__stage { display: none; }
+.ppl__head { color: var(--dim); }
+.ppl__card { display: grid; gap: 14px; }
+.ppl__name { font-size: clamp(54px, 16vw, 150px); --wdth: 72; }
+.ppl__name .line { white-space: nowrap; }
+.ppl__dept { font: 600 18px/1.3 var(--f-display); color: var(--accent, var(--bone)); }
+.ppl__quote { margin: 8px 0 0; font: 400 19px/1.45 var(--f-display); max-width: 520px; color: var(--mist); }
+.ppl__counter { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ppl__pin { height: 100svh; overflow: hidden; padding: 0; display: block; background: var(--tint, var(--night)); }
+  .ppl__head { position: absolute; z-index: 4; left: var(--pad); top: 84px; }
+  .ppl__stage { display: block; position: absolute; left: 7vw; top: 50%; width: min(36vw, 64svh * .8); height: 72svh; margin-top: -36svh; perspective: 1100px; z-index: 2; }
+  .ppl__frame { position: absolute; inset: 0; transform-style: preserve-3d; --mx: 50%; --my: 30%; box-shadow: 0 50px 120px -30px rgba(0, 0, 0, .85); }
+  .ppl__portrait { position: absolute; inset: 0; overflow: hidden; }
+  .ppl__light { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(40% 40% at var(--mx) var(--my), rgba(255, 255, 255, .22), transparent 70%); mix-blend-mode: soft-light; z-index: 3; }
+  .ppl__frame .crop { inset: -10px; z-index: 4; }
+  .ppl__card { position: absolute; inset: 0; display: block; pointer-events: none; }
+  .ppl__name { position: absolute; z-index: 3; left: calc(7vw + min(36vw, 64svh * .8) - 4vw); bottom: 18svh; font-size: min(12.5vw, 24svh); line-height: .84; margin: 0; color: #fff; mix-blend-mode: difference; }
+  .ppl__name .line { white-space: nowrap; margin: 0; }
+  .ppl__info { position: absolute; z-index: 4; right: var(--pad); top: 50%; translate: 0 -62%; width: min(27vw, 380px); pointer-events: auto; }
+  .ppl__dept { font-size: 15px; margin: 6px 0 18px; }
+  .ppl__quote { font-size: 17px; border-left: 1px solid var(--accent); padding-left: 16px; }
+  .ppl__counter { display: block; position: absolute; z-index: 4; right: var(--pad); top: 84px; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .ppl__stage { left: 50%; width: 62vw; height: 46svh; margin: 0 0 0 -31vw; top: 15%; }
+  .ppl__name { left: var(--pad); bottom: 32svh; font-size: 22vw; mix-blend-mode: normal; text-shadow: 0 2px 30px rgba(0, 0, 0, .7); }
+  .ppl__info { left: var(--pad); right: var(--pad); width: auto; top: auto; bottom: 76px; translate: 0 0; }
+  .ppl__quote { font-size: 14px; }
+}

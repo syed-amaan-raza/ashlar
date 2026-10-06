@@ -1,0 +1,52 @@
+/* ═══ 01 · HERO ═══════════════════════════════════════════════
+   Static layout first (reduced motion / no JS): a poster, 100svh.
+   The motion layout below only changes what needs pinning.        */
+.hero { height: 100svh; min-height: 560px; overflow: hidden; background: var(--night); color: var(--bone); }
+.hero__sky { position: absolute; inset: 0; background:
+  radial-gradient(60% 55% at 50% 78%, rgba(255, 77, 23, .34), transparent 70%),
+  radial-gradient(90% 60% at 50% 100%, rgba(255, 138, 60, .18), transparent 70%),
+  linear-gradient(180deg, #03050b 0%, #0a1330 55%, #1a1f48 100%); }
+.hero__grid { position: absolute; inset: 0; opacity: .8; -webkit-mask-image: radial-gradient(75% 70% at 50% 60%, #000 20%, transparent 85%); mask-image: radial-gradient(75% 70% at 50% 60%, #000 20%, transparent 85%); }
+.hero__plane { position: absolute; inset: 0; will-change: transform; }
+.hero__plane svg { width: 100%; height: 100%; }
+.hero__plane--photo { z-index: 1; }
+.hero__plane--far { z-index: 1; } .hero__plane--arch { z-index: 2; } .hero__plane--fore { z-index: 5; }
+.plate__tag--hero { left: auto; right: var(--pad); bottom: 74px; z-index: 6; }
+
+.hero__title { position: absolute; z-index: 4; left: 0; right: 0; top: 53%; transform: translateY(-50%); margin: 0; padding: 0 var(--pad);
+  font-size: min(19vw, 26.5svh); --wdth: 62; --wght: 900; color: var(--bone); mix-blend-mode: normal; text-shadow: 0 0 60px rgba(255, 255, 255, .12); pointer-events: none; }
+.hero__line { white-space: nowrap; }
+.hero__line--1 { margin-left: -1.4vw; }
+.hero__line--2 { margin-left: 18vw; }
+.hero__line--3 { margin-left: 3vw; }
+.hero__dot { color: var(--signal); text-shadow: 0 0 40px rgba(255, 77, 23, .8); display: inline-block; }
+
+.hero__orb { position: absolute; z-index: 8; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--signal); pointer-events: none; }
+.hero__flood { position: absolute; inset: 0; z-index: 9; background: var(--signal); pointer-events: none; --r: 0px; --fx: 50%; --fy: 50%; clip-path: circle(var(--r) at var(--fx) var(--fy)); }
+.hero__orb-glow { position: absolute; inset: -26px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 77, 23, .85) 0%, rgba(255, 77, 23, .25) 38%, transparent 68%); }
+.hero__orb { transform: translate(72vw, 28svh); }
+
+.hero__hud { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
+.hero__hud > * { position: absolute; }
+.hero__tl { left: var(--pad); top: 84px; max-width: 300px; }
+.hero__tr { right: var(--pad); top: 84px; text-align: right; }
+.hero__lede { right: var(--pad); bottom: 92px; max-width: 290px; font: 400 14px/1.5 var(--f-display); font-variation-settings: 'wdth' 100; color: var(--mist); }
+.hero__bl { left: var(--pad); bottom: 92px; }
+.hero__scroll { left: 50%; bottom: 58px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; pointer-events: auto; color: var(--bone); }
+.hero__scroll i { display: block; width: 46px; height: 1px; background: var(--bone); opacity: .6; transform-origin: left; animation: scrollcue 2.2s var(--ease-io) infinite; }
+@keyframes scrollcue { 0% { transform: scaleX(.1); } 55% { transform: scaleX(1); opacity: .9; } 100% { transform: scaleX(1); opacity: 0; } }
+.hero__crop { inset: 76px var(--pad) 70px; z-index: 7; }
+
+@media (max-width: 860px) {
+  .hero__title { font-size: min(27vw, 17svh); top: 46%; }
+  .hero__line--1 { white-space: normal; margin-left: 0; line-height: .86; }
+  .hero__line--2 { margin-left: 8vw; }
+  .hero__line--3 { margin-left: 0; }
+  .hero__tl { top: 74px; max-width: 220px; } .hero__tr { top: 74px; }
+  .hero__lede { left: var(--pad); right: auto; bottom: 120px; max-width: 78%; font-size: 13px; }
+  .hero__bl { display: none; }
+  .hero__scroll { left: var(--pad); transform: none; bottom: 78px; }
+  .hero__crop { display: none; }
+  .plate__tag--hero { display: none; }
+}
+@media (max-width: 860px) and (prefers-reduced-motion: no-preference) { .hero__line--1 { white-space: normal; } }

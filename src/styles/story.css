@@ -1,0 +1,27 @@
+/* ═══ 02 · STORY ═══════════════════════════════════════════════
+   Static: four statements stacked on orange, generous and legible. */
+.story { background: var(--signal); color: var(--ink); }
+.story__pin { --gridc: rgba(20, 22, 28, .12); --ghost: var(--ink); position: relative; background: var(--signal); padding: 18vh var(--pad) 22vh; overflow: hidden; }
+.story__grid { position: absolute; inset: 0; background-image: linear-gradient(var(--gridc) 1px, transparent 1px), linear-gradient(90deg, var(--gridc) 1px, transparent 1px); background-size: 72px 72px; pointer-events: none; }
+.story__stage { position: relative; display: grid; gap: 12vh; }
+.story__fig { position: relative; margin-top: 10vh; color: rgba(20, 22, 28, .75); }
+.story__lede { position: relative; margin-top: 10px; max-width: 430px; font: 400 15px/1.55 var(--f-display); font-variation-settings: 'wdth' 100; color: rgba(20, 22, 28, .8); }
+.phrase { font-size: clamp(56px, 13vw, 200px); --wdth: 70; --wght: 900; color: var(--ink); -webkit-text-stroke: 1.5px var(--ghost); transform-origin: 50% 50%; will-change: transform; }
+.phrase .line { white-space: nowrap; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .story { height: auto; }
+  .story__pin { height: 100svh; padding: 0; }
+  .story__stage { position: absolute; inset: 0; display: block; }
+  .phrase { position: absolute; left: 0; right: 0; top: 50%; margin: 0; text-align: center; translate: 0 -50%; font-size: min(15.5vw, 27svh); }
+  .story__fig { position: absolute; left: var(--pad); bottom: 74px; margin: 0; }
+  .story__lede { position: absolute; right: var(--pad); bottom: 74px; margin: 0; max-width: 340px; font-size: 13.5px; text-align: left; }
+}
+@media (max-width: 860px) {
+  .phrase { font-size: min(14.2vw, 15svh); }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .phrase { font-size: min(14.2vw, 15svh); }
+  .story__lede { display: none; }
+  .story__fig { bottom: 62px; }
+}

@@ -1,0 +1,29 @@
+/* ═══ 06 · STUDENT LIFE ══════════════════════════════════════════
+   Static: statement, a two-column collage, statement.             */
+.life { background: var(--night); color: var(--bone); }
+.life__pin { position: relative; padding: 14vh var(--pad); }
+.life__grid { display: none; }
+.life__t1, .life__t2 { font-size: clamp(56px, 13vw, 190px); --wdth: 66; position: relative; z-index: 1; }
+.life__t1 .line, .life__t2 .line { white-space: nowrap; }
+.life__tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 8vh 0; }
+.tile { position: relative; aspect-ratio: var(--ratio); overflow: hidden; background: var(--slab); }
+.tile figcaption { position: absolute; left: 10px; bottom: 9px; z-index: 2; padding: 4px 7px; background: rgba(5, 9, 18, .72); color: var(--bone); }
+.life__facts { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 6vh; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .life__pin { height: 100svh; overflow: hidden; padding: 0; }
+  .life__grid { display: block; position: absolute; inset: 0; opacity: .55; }
+  .life__t1 { position: absolute; z-index: 1; left: 0; right: 0; top: 50%; translate: 0 -50%; text-align: center; font-size: min(17.5vw, 31svh); line-height: .82; margin: 0; }
+  .life__t1 .line { margin: 0; }
+  .life__tiles { position: absolute; inset: 0; display: block; margin: 0; z-index: 2; }
+  .tile { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * 1%); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .7), inset 0 0 0 1px var(--line-2); will-change: transform; }
+  .life__t2 { position: absolute; z-index: 6; left: 0; right: 0; top: 50%; translate: 0 -50%; text-align: center; font-size: min(11.8vw, 22svh); margin: 0; line-height: .84; mix-blend-mode: difference; color: #fff; pointer-events: none; }
+  .life__facts { position: absolute; z-index: 7; left: var(--pad); bottom: 56px; margin: 0; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 860px) {
+  .tile { left: calc(var(--mx, var(--x)) * 1%); top: calc(var(--my, var(--y)) * 1%); width: calc(var(--mw, var(--w)) * 1%); }
+  .tile--nom { display: none; }
+  .life__t1 { font-size: 24vw; }
+  .life__t2 { font-size: 15vw; mix-blend-mode: normal; text-shadow: 0 2px 30px rgba(5, 9, 18, .9); }
+  .life__facts { display: none; }
+}

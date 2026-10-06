@@ -1,0 +1,89 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--night); color: var(--bone); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100svh; overflow-x: clip;
+  font-family: var(--f-display); font-weight: 400; font-size: 16px; line-height: 1.5;
+  font-variation-settings: 'wdth' 100;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+::selection { background: var(--signal); color: var(--ink); }
+
+/* Keyboard focus is always visible, on every theme */
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; border-radius: 2px; }
+[data-theme='signal'] :focus-visible { outline-color: var(--ink); }
+
+.skip { position: fixed; left: var(--pad); top: -80px; z-index: 200; background: var(--bone); color: var(--ink); padding: 10px 14px; font: 500 13px/1 var(--f-mono); transition: top .2s; }
+.skip:focus { top: var(--pad); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── Display type: heavy, tight, morphable ───────────────── */
+.display {
+  font-family: var(--f-display); font-weight: 900; text-transform: uppercase;
+  font-variation-settings: 'wdth' var(--wdth, 80), 'wght' var(--wght, 900);
+  line-height: .84; letter-spacing: -0.025em;
+}
+
+/* Metadata: small, quiet, mono (the reel's HUD voice) */
+.meta { font: 400 11px/1.5 var(--f-mono); letter-spacing: .04em; color: var(--fg-dim, var(--dim)); }
+.meta b { font-weight: 500; color: var(--fg, var(--bone)); }
+
+/* ── Text-reveal primitives ───────────────────────────────── */
+.line { display: block; overflow: hidden; padding: .07em 0 .1em; margin: -.07em 0 -.1em; }
+.line__i { display: block; }
+.chars { display: inline-block; white-space: nowrap; }
+.ch { display: inline-block; overflow: hidden; vertical-align: top; padding: .07em 0 .1em; margin: -.07em 0 -.1em; }
+.ch__i { display: inline-block; will-change: transform; }
+
+/* ── HUD crop marks (corner brackets from the reel) ───────── */
+.crop { position: absolute; inset: 0; pointer-events: none; }
+.crop i { position: absolute; width: 14px; height: 14px; border: 0 solid var(--fg-dim, var(--dim)); }
+.crop i:nth-child(1) { left: 0; top: 0; border-left-width: 1px; border-top-width: 1px; }
+.crop i:nth-child(2) { right: 0; top: 0; border-right-width: 1px; border-top-width: 1px; }
+.crop i:nth-child(3) { left: 0; bottom: 0; border-left-width: 1px; border-bottom-width: 1px; }
+.crop i:nth-child(4) { right: 0; bottom: 0; border-right-width: 1px; border-bottom-width: 1px; }
+
+/* ── Blueprint grid ───────────────────────────────────────── */
+.blueprint {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px; background-position: -1px -1px;
+}
+
+/* ── Plates (images) ──────────────────────────────────────── */
+.plate { position: absolute; inset: 0; overflow: hidden; background: var(--slab); }
+.plate img, .plate__art, .plate__art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.plate__tag {
+  position: absolute; left: 10px; bottom: 8px; font: 400 9.5px/1 var(--f-mono); letter-spacing: .04em;
+  color: var(--bone); opacity: .5; padding: 4px 6px; background: rgba(5, 9, 18, .6); pointer-events: none;
+}
+
+.scene { position: relative; }
+.scene[data-theme] { color: var(--fg); background: var(--bg); }
+
+/* ── Buttons / links ──────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: .9em; padding: 1.05em 1.5em; border-radius: 999px;
+  font: 600 14px/1 var(--f-display); font-variation-settings: 'wdth' 100, 'wght' 650; letter-spacing: .01em;
+  background: var(--signal); color: var(--ink); position: relative; overflow: hidden; isolation: isolate;
+  transition: transform .4s var(--ease-out);
+}
+.btn::before { content: ''; position: absolute; inset: 0; background: var(--bone); transform: translateY(101%); transition: transform .5s var(--ease-out); z-index: -1; }
+.btn:hover::before, .btn:focus-visible::before { transform: none; }
+.btn--ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg-dim); }
+.btn--ghost::before { background: var(--fg); }
+.btn--ghost:hover, .btn--ghost:focus-visible { color: var(--bg); }
+.btn__arrow { width: 22px; height: 10px; flex: none; }
+
+/* Ambient light for the pinned stages */
+.pin { position: relative; height: 100svh; width: 100%; overflow: hidden; }
+
+html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor [data-cursor] { cursor: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

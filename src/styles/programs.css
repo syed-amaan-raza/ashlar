@@ -1,0 +1,40 @@
+/* ═══ 05 · PROGRAMMES ═══════════════════════════════════════════
+   Static / phone: a vertical list, every course fully open.       */
+.crs-scene { background: var(--night); color: var(--bone); }
+.crs__pin { position: relative; padding: 14vh 0 12vh; }
+.crs__bgs, .crs__shade, .crs__bar { display: none; }
+.crs__head { padding: 0 var(--pad) 8vh; max-width: 900px; }
+.crs__title { font: 700 clamp(26px, 5vw, 46px)/1.08 var(--f-display); font-variation-settings: 'wdth' 90, 'wght' 700; letter-spacing: -.015em; margin-top: 12px; }
+.crs__track { display: grid; gap: 0; }
+.crs { position: relative; padding: 8vh var(--pad); border-top: 1px solid var(--line-2); display: grid; gap: 16px; }
+.crs__thumb { position: relative; aspect-ratio: 16 / 8; overflow: hidden; margin-bottom: 6px; }
+.crs__name { font-size: clamp(48px, 15vw, 110px); --wdth: 70; }
+.crs__l { display: block; }
+.crs__tracks { display: grid; gap: 4px; font: 500 16px/1.3 var(--f-display); font-variation-settings: 'wdth' 90, 'wght' 550; color: var(--mist); }
+.crs__tracks li span { color: var(--signal); margin-right: 8px; }
+.crs__note { font: 400 15px/1.5 var(--f-display); color: var(--dim); max-width: 460px; }
+.crs__go { justify-self: start; margin-top: 6px; }
+
+/* Desktop motion: pinned stage + horizontal track */
+@media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+  .crs__pin { height: 100svh; overflow: hidden; padding: 0; }
+  .crs__bgs { display: block; position: absolute; inset: 0; }
+  .crs__bg { position: absolute; inset: 0; opacity: 0; transform: scale(1.06); transition: opacity .9s var(--ease-io), transform 1.4s var(--ease-out); }
+  .crs__bg.is-on { opacity: .62; transform: none; }
+  .crs__shade { display: block; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 9, 18, .94) 0%, rgba(5, 9, 18, .6) 45%, rgba(5, 9, 18, .85) 100%), linear-gradient(0deg, rgba(5, 9, 18, .8), transparent 40%); }
+  .crs__head { position: absolute; z-index: 3; left: var(--pad); top: 92px; padding: 0; max-width: 520px; }
+  .crs__title { font-size: 22px; }
+  .crs__track { position: absolute; z-index: 2; left: 0; top: 17svh; bottom: 11svh; display: flex; align-items: center; padding: 0 10vw 0 38vw; will-change: transform; }
+  .crs { flex: 0 0 min(62vw, 980px); height: 100%; padding: 0 3vw 0 0; border: 0; border-left: 1px solid var(--line-2); padding-left: 2.2vw; margin-left: 2vw; align-content: space-between; gap: 0; }
+  .crs__thumb { display: none; }
+  .crs__name { font-size: min(10.4vw, 21svh); --wdth: 62; transition: --wdth .7s var(--ease-out), color .5s; color: rgba(236, 233, 225, .55); }
+  .crs[data-on='true'] .crs__name, .crs:hover .crs__name { --wdth: 96; color: var(--bone); }
+  .crs__tracks { align-self: end; }
+  .crs__tracks li { opacity: .35; transform: translateX(-14px); transition: opacity .5s var(--ease-out), transform .6s var(--ease-out), color .3s; transition-delay: calc(var(--j) * 50ms); }
+  .crs[data-on='true'] .crs__tracks li, .crs:hover .crs__tracks li { opacity: 1; transform: none; }
+  .crs__note, .crs__go { opacity: 0; transform: translateY(10px); transition: opacity .5s .2s, transform .6s .2s var(--ease-out); }
+  .crs[data-on='true'] .crs__note, .crs:hover .crs__note, .crs[data-on='true'] .crs__go, .crs:hover .crs__go, .crs__go:focus-visible { opacity: 1; transform: none; }
+  .crs__no { align-self: start; }
+  .crs__bar { display: block; position: absolute; z-index: 3; left: var(--pad); right: var(--pad); bottom: 60px; height: 1px; background: var(--line-2); }
+  .crs__bar i { display: block; height: 100%; background: var(--signal); transform: scaleX(0); transform-origin: left; }
+}
